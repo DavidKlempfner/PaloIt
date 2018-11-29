@@ -1,0 +1,22 @@
+﻿@model PaloItChallenge.Models.FullName
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @using (Html.BeginForm("SaveFullName", "Home"))
+    {
+        @Html.EditorForModel()
+        <input type="submit" value="Save" />
+    }
+</div>
+
+<div>    
+    @Html.DisplayForModel()
+</div>
+<div>
+    @Html.Label("Max Num Of Consecutive Zeros: ")
+    @ViewBag.MaxNumOfConsecutiveZeros
+</div>
