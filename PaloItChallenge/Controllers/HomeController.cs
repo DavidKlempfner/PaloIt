@@ -18,7 +18,7 @@ namespace PaloItChallenge.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveFullName(FullName fullName)
+        public ActionResult Post(FullName fullName)
         {
             if (!ModelState.IsValid)
             {
@@ -26,10 +26,7 @@ namespace PaloItChallenge.Controllers
             }
             _businessService.SaveFullName(fullName);
 
-            //TODO: Pull this out into its own method, probably best to do this in Javascript once the UI has populated the name labels.
-            int sumOfAsciiValues = AsciiHelper.SumAsciiValuesInString($"{fullName.FirstName} {fullName.LastName}");
-            string sumOfAsciiValuesAsBinaryString = AsciiHelper.ConvertNumToBinaryString(sumOfAsciiValues);
-            ViewBag.MaxNumOfConsecutiveZeros = AsciiHelper.GetMaxNumOfConsecutiveZeros(sumOfAsciiValuesAsBinaryString);
+            ViewBag.MaxNumOfConsecutiveZeros = _businessService.GetMaxNumOfConsecutiveZerosFromAsciiValueSum(fullName);
             return View("Index", fullName);
         }
     }
