@@ -17,9 +17,8 @@ namespace PaloItChallenge.DataAccess
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                //TODO: Confirm SQL injection can't happen. 
-                //Write a unit test to make sure SqlException is thrown when fullName.FirstName is a','b');Delete from UniHockey.dbo.FullName where id = 2--
-                db.Execute("INSERT INTO UniHockey.dbo.FullName (FirstName, LastName) VALUES  (@firstName, @lastName)", new { fullName.FirstName, fullName.LastName });                
+                //Set up an Exception FilterAttribute in case this fails:
+                db.Execute("INSERT INTO UniHockey.dbo.FullName (FirstName, LastName) VALUES  (@firstName, @lastName)", new { fullName.FirstName, fullName.LastName });
             }
         }
     }
